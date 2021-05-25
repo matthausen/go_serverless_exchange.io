@@ -1,4 +1,7 @@
+language: go
 language: node_js
+go:
+  - 1.16.x
 node_js:
   - 13
 
