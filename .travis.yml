@@ -1,28 +1,18 @@
-language: go
-language: node_js
-go:
-  - 1.16.x
-node_js:
-  - 13
+matrix:
+  include:
+    - language: go
+      go:
+        - 1.16.x
+      script:
+        - go mod download
+        - make build
 
-services:
-  - docker
-
-branches:
-  only:
-    - main
-
-install:
-  - npm install -g serverless
-
-script:
-  # Install dependencies
-  - go mod download
-  # Build the binary file
-  - make build
-  # deploy to AWS lambda
-  - sls deploy
-
-environments:
-  - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
-  - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+    - language: node.js
+      node_js: "12.0"
+      before_script:
+        - npm install -g serverless
+      environments:
+        - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID}
+        - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY}
+      script:
+        - sls deploy
