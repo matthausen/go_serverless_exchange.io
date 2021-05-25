@@ -12,12 +12,6 @@ provider:
   stage: dev
   region: eu-west-2
 
-package:
-  exclude:
-    - ./**
-  include:
-    - ./bin/**
-
 functions:
   exchange:
     handler: bin/exchange
