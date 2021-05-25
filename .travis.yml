@@ -16,6 +16,8 @@ install:
   - npm install -g serverless
 
 script:
+  # Install dependencies
+  - go mod download
   # Build the binary file
   - make build
   # deploy to AWS lambda
